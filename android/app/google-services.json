@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "569490492116",
+    "project_id": "packaging-report",
+    "storage_bucket": "packaging-report.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569490492116:android:898a42cf9b5853af288941",
+        "android_client_info": {
+          "package_name": "com.example.tsl_packaging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZrvYhXGlT-DDCLXk6YIVY0YurSAAgYbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
