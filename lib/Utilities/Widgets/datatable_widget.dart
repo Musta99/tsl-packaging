@@ -46,6 +46,8 @@ class DatatableWidget extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     columns: [
+                      DataColumn(label: Text("Factory")),
+                      DataColumn(label: Text("Floor")),
                       DataColumn(label: Text("Buyer")),
                       DataColumn(label: Text("Style")),
                       DataColumn(label: Text("Buy")),
@@ -74,6 +76,8 @@ class DatatableWidget extends StatelessWidget {
                     rows: [
                       for (int i = 0; i < data.length; i++)
                         DataRow(cells: [
+                          DataCell(Text(data[i]["factoryName"])),
+                          DataCell(Text(data[i]["floorName"])),
                           DataCell(Text(data[i]["buyer"])),
                           DataCell(Text(data[i]["style"])),
                           DataCell(Text(data[i]["buy"])),

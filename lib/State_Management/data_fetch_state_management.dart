@@ -228,4 +228,20 @@ class DataFetchStateManagement extends ChangeNotifier {
       );
     }
   }
+
+  // Fetch Deleted Data ----------------------------------------------->
+  List deletedPOList = [];
+  bool isLoading = false;
+  void fetchDeletedPO() async {
+    isLoading = true;
+    notifyListeners();
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection("deletedPO").get();
+
+    deletedPOList = querySnapshot.docs;
+    notifyListeners();
+
+    isLoading = false;
+    notifyListeners();
+  }
 }

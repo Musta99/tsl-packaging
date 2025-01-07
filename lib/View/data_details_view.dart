@@ -19,6 +19,26 @@ class DataDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles().backgroundColor,
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () {
+          ExcelGenerator().createExcel(
+              Provider.of<DataFetchStateManagement>(context, listen: false)
+                  .packagingData,
+              Provider.of<SelectionStateManagement>(context, listen: false)
+                  .selectedFactory,
+              Provider.of<SelectionStateManagement>(context, listen: false)
+                  .selectedFloor,
+              Provider.of<SelectionStateManagement>(context, listen: false)
+                  .selectedDate);
+        },
+        child: Center(
+          child: Image.asset(
+            "assets/images/excel.png",
+            height: 30,
+            width: 30,
+          ),
+        ),
+      ),
       body: Container(
         margin: EdgeInsets.symmetric(
           horizontal: 20,
@@ -222,59 +242,6 @@ class DataDetailsView extends StatelessWidget {
                           data: Provider.of<DataFetchStateManagement>(context,
                                   listen: false)
                               .packagingData),
-            ),
-            SizedBox(
-              height: 50,
-              child: Card(
-                  color: Styles().palletes4,
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  child: GestureDetector(
-                      onTap: () {
-                        ExcelGenerator().createExcel(
-                            Provider.of<DataFetchStateManagement>(context,
-                                    listen: false)
-                                .packagingData,
-                            Provider.of<SelectionStateManagement>(context,
-                                    listen: false)
-                                .selectedFactory,
-                            Provider.of<SelectionStateManagement>(context,
-                                    listen: false)
-                                .selectedFloor,
-                            Provider.of<SelectionStateManagement>(context,
-                                    listen: false)
-                                .selectedDate);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Generate Excel",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Colors.white,
-                              child: Center(
-                                child: Image.asset(
-                                  "assets/images/excel.png",
-                                  height: 20,
-                                  width: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ))),
             ),
           ],
         ),
