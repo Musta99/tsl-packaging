@@ -7,8 +7,24 @@ import 'package:tsl_packaging/State_Management/data_fetch_state_management.dart'
 import 'package:tsl_packaging/State_Management/selection_state_management.dart';
 import 'package:tsl_packaging/Utilities/styles.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<DataFetchStateManagement>(context, listen: false)
+        .fetchUserData();
+
+    Provider.of<DataFetchStateManagement>(context, listen: false)
+        .fetchFactoryWisePOCount();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,36 +67,111 @@ class DashboardScreen extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.4,
                   height: MediaQuery.of(context).size.height * 0.6,
-                  child: PieChart(
-                    duration: Duration(
-                      seconds: 1,
-                    ),
-                    curve: Curves.bounceInOut,
-                    PieChartData(
-                      centerSpaceRadius: 15,
-                      sectionsSpace: 10,
-                      sections: [
-                        PieChartSectionData(
-                          value: 10,
-                          radius: 100,
-                          color: Colors.red,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: PieChart(
+                          duration: Duration(
+                            seconds: 1,
+                          ),
+                          curve: Curves.bounceInOut,
+                          PieChartData(
+                            centerSpaceRadius: 15,
+                            sectionsSpace: 10,
+                            sections: [
+                              PieChartSectionData(
+                                value: Provider.of<DataFetchStateManagement>(
+                                        context,
+                                        listen: false)
+                                    .tsl1Count
+                                    .length
+                                    .toDouble(),
+                                radius: 70,
+                                color: Colors.red,
+                              ),
+                              PieChartSectionData(
+                                value: Provider.of<DataFetchStateManagement>(
+                                        context,
+                                        listen: false)
+                                    .tsl2Count
+                                    .length
+                                    .toDouble(),
+                                radius: 70,
+                              ),
+                              PieChartSectionData(
+                                value: Provider.of<DataFetchStateManagement>(
+                                        context,
+                                        listen: false)
+                                    .tsl3Count
+                                    .length
+                                    .toDouble(),
+                                radius: 70,
+                                color: Colors.green,
+                              ),
+                              PieChartSectionData(
+                                value: Provider.of<DataFetchStateManagement>(
+                                        context,
+                                        listen: false)
+                                    .tsl4Count
+                                    .length
+                                    .toDouble(),
+                                radius: 70,
+                                color: Colors.teal,
+                              ),
+                            ],
+                          ),
                         ),
-                        PieChartSectionData(
-                          value: 12,
-                          radius: 110,
-                        ),
-                        PieChartSectionData(
-                          value: 22,
-                          radius: 115,
-                          color: Colors.green,
-                        ),
-                        PieChartSectionData(
-                          value: 32,
-                          radius: 115,
-                          color: Colors.teal,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: ListView.builder(
+                            itemCount: Provider.of<DataFetchStateManagement>(
+                                    context,
+                                    listen: false)
+                                .userList
+                                .length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    leading: Text(
+                                      Provider.of<DataFetchStateManagement>(
+                                              context,
+                                              listen: false)
+                                          .userList[index]["factoryName"],
+                                      style: GoogleFonts.ptSerif(
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      Provider.of<DataFetchStateManagement>(
+                                              context,
+                                              listen: false)
+                                          .userList[index]["userName"],
+                                      style: GoogleFonts.ptSerif(fontSize: 13),
+                                    ),
+                                    subtitle: Text(
+                                      Provider.of<DataFetchStateManagement>(
+                                              context,
+                                              listen: false)
+                                          .userList[index]["floorName"],
+                                      style: GoogleFonts.ptSerif(
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    trailing: Text(
+                                        Provider.of<DataFetchStateManagement>(
+                                                context,
+                                                listen: false)
+                                            .userList[index]["lastActive"]),
+                                  ),
+                                  Divider(),
+                                ],
+                              );
+                            }),
+                      )
+                    ],
                   ),
                 )
               ],

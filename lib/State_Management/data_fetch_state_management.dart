@@ -244,4 +244,42 @@ class DataFetchStateManagement extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  // fetch User data ------------------------------------------>
+  List userList = [];
+  void fetchUserData() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection("UserData").get();
+
+    userList = querySnapshot.docs;
+    notifyListeners();
+  }
+
+  // Factory Wise PO Count --------------------------------------->
+  List tsl1Count = [];
+  List tsl2Count = [];
+  List tsl3Count = [];
+  List tsl4Count = [];
+
+  void fetchFactoryWisePOCount() async {
+    QuerySnapshot tsl1Snapshot =
+        await FirebaseFirestore.instance.collection("TSL-1").get();
+    tsl1Count = tsl1Snapshot.docs;
+    notifyListeners();
+
+    QuerySnapshot tsl2Snapshot =
+        await FirebaseFirestore.instance.collection("TSL-2").get();
+    tsl2Count = tsl2Snapshot.docs;
+    notifyListeners();
+
+    QuerySnapshot tsl3Snapshot =
+        await FirebaseFirestore.instance.collection("TSL-3").get();
+    tsl3Count = tsl3Snapshot.docs;
+    notifyListeners();
+
+    QuerySnapshot tsl4Snapshot =
+        await FirebaseFirestore.instance.collection("TSL-4").get();
+    tsl4Count = tsl4Snapshot.docs;
+    notifyListeners();
+  }
 }
