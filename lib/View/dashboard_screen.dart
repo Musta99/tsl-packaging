@@ -1,7 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:tsl_packaging/State_Management/data_fetch_state_management.dart';
 import 'package:tsl_packaging/State_Management/selection_state_management.dart';
@@ -70,59 +70,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        child: PieChart(
-                          duration: Duration(
-                            seconds: 1,
-                          ),
-                          curve: Curves.bounceInOut,
-                          PieChartData(
-                            centerSpaceRadius: 15,
-                            sectionsSpace: 10,
-                            sections: [
-                              PieChartSectionData(
-                                value: Provider.of<DataFetchStateManagement>(
-                                        context,
-                                        listen: false)
-                                    .tsl1Count
-                                    .length
-                                    .toDouble(),
-                                radius: 70,
-                                color: Colors.red,
-                              ),
-                              PieChartSectionData(
-                                value: Provider.of<DataFetchStateManagement>(
-                                        context,
-                                        listen: false)
-                                    .tsl2Count
-                                    .length
-                                    .toDouble(),
-                                radius: 70,
-                              ),
-                              PieChartSectionData(
-                                value: Provider.of<DataFetchStateManagement>(
-                                        context,
-                                        listen: false)
-                                    .tsl3Count
-                                    .length
-                                    .toDouble(),
-                                radius: 70,
-                                color: Colors.green,
-                              ),
-                              PieChartSectionData(
-                                value: Provider.of<DataFetchStateManagement>(
-                                        context,
-                                        listen: false)
-                                    .tsl4Count
-                                    .length
-                                    .toDouble(),
-                                radius: 70,
-                                color: Colors.teal,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: PieChart(
+                            dataMap: {
+                              "TSl-1":
+                                  Provider.of<DataFetchStateManagement>(context)
+                                      .tsl1Count
+                                      .length as dynamic,
+                              "TSl-2":
+                                  Provider.of<DataFetchStateManagement>(context)
+                                      .tsl2Count
+                                      .length as dynamic,
+                              "TSl-3":
+                                  Provider.of<DataFetchStateManagement>(context)
+                                      .tsl3Count
+                                      .length as dynamic,
+                              "TSl-4":
+                                  Provider.of<DataFetchStateManagement>(context)
+                                      .tsl4Count
+                                      .length as dynamic,
+                            },
+                            animationDuration: Duration(milliseconds: 800),
+                          )),
                       Container(
                         height: MediaQuery.of(context).size.height * 0.3,
                         child: ListView.builder(

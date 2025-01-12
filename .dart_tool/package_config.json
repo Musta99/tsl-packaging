@@ -140,12 +140,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "fl_chart",
-      "rootUri": "file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.69.2",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
       "name": "flutter",
       "rootUri": "file:///D:/Flutter%20SDK/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -308,6 +302,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "pie_chart",
+      "rootUri": "file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/pie_chart-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.6",
       "packageUri": "lib/",
@@ -410,7 +410,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-01-04T03:56:40.909598Z",
+  "generated": "2025-01-12T09:53:14.721924Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///D:/Flutter%20SDK/flutter",

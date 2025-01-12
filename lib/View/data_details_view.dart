@@ -29,7 +29,9 @@ class DataDetailsView extends StatelessWidget {
               Provider.of<SelectionStateManagement>(context, listen: false)
                   .selectedFloor,
               Provider.of<SelectionStateManagement>(context, listen: false)
-                  .selectedDate);
+                  .selectedDate,
+              Provider.of<DataFetchStateManagement>(context, listen: false)
+                  .countDGrQty);
         },
         child: Center(
           child: Image.asset(

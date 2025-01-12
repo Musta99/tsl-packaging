@@ -58,6 +58,7 @@ class DataFetchStateManagement extends ChangeNotifier {
   // -----------------> Fetch Data for Data Details View <-------------------------
 
   List packagingData = [];
+  int countDGrQty = 0;
   bool isLoaded = false;
   Future getDataAdmin(BuildContext context) async {
     try {
@@ -78,6 +79,14 @@ class DataFetchStateManagement extends ChangeNotifier {
 
       packagingData = querySnapshot.docs;
       notifyListeners();
+
+      for (int i = 0; i < packagingData.length; i++) {
+        countDGrQty =
+            countDGrQty + int.parse(packagingData[i]["dGrQty"].toString());
+        notifyListeners();
+      }
+
+      print(countDGrQty);
 
       isLoaded = true;
       notifyListeners();

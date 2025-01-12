@@ -90,10 +90,6 @@ firebase_core_web
 3.4
 file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.18.1/
 file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.18.1/lib/
-fl_chart
-3.2
-file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.69.2/
-file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.69.2/lib/
 flutter_easyloading
 2.12
 file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_easyloading-3.0.5/
@@ -190,6 +186,10 @@ petitparser
 3.2
 file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-6.0.2/
 file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-6.0.2/lib/
+pie_chart
+2.12
+file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/pie_chart-5.4.0/
+file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/pie_chart-5.4.0/lib/
 platform
 3.2
 file:///C:/Users/mustafizur.r/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.6/

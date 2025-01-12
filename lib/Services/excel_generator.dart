@@ -341,7 +341,8 @@ import 'package:excel/excel.dart';
 // }
 
 class ExcelGenerator {
-  void createExcel(List data, factoryName, floorName, date) {
+  void createExcel(
+      List data, factoryName, floorName, date, int totalDGrCumQty) {
     var excel = Excel.createExcel();
     var sheet = excel["Sheet1"];
 
@@ -371,9 +372,15 @@ class ExcelGenerator {
     var verCenterStyle = CellStyle(
       verticalAlign: VerticalAlign.Center,
     );
-    var signStyle = CellStyle(
+    var pageTitleStyle = CellStyle(
       horizontalAlign: HorizontalAlign.Center,
       verticalAlign: VerticalAlign.Center,
+      bold: true,
+      fontSize: 12,
+    );
+    var signStyle = CellStyle(
+      horizontalAlign: HorizontalAlign.Left,
+      verticalAlign: VerticalAlign.Bottom,
       bold: true,
       fontSize: 12,
     );
@@ -457,7 +464,7 @@ class ExcelGenerator {
         TextCellValue("Daily Work Center Report");
     sheet
         .cell(CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: 0))
-        .cellStyle = signStyle;
+        .cellStyle = pageTitleStyle;
 
     // ----------------------- Date -------------------------- //
     sheet.merge(CellIndex.indexByColumnRow(columnIndex: 25, rowIndex: 0),
@@ -492,9 +499,9 @@ class ExcelGenerator {
       "",
       "",
       "",
-      "D Dr. Qty",
-      "Total Gr Cum Qty",
-      "Balance Gr Qty",
+      "D GR Qty",
+      "Total GR Cum Qty",
+      "Balance GR Qty",
       "Last Day Pack Qty",
       "Remarks"
     ];
@@ -983,11 +990,6 @@ class ExcelGenerator {
     // ----------------- Prepared By ------------------- //
     sheet.merge(
         CellIndex.indexByColumnRow(
-            columnIndex: 0, rowIndex: data.length * 6 + 2),
-        CellIndex.indexByColumnRow(
-            columnIndex: 6, rowIndex: data.length * 6 + 2));
-    sheet.merge(
-        CellIndex.indexByColumnRow(
             columnIndex: 0, rowIndex: data.length * 6 + 3),
         CellIndex.indexByColumnRow(
             columnIndex: 6, rowIndex: data.length * 6 + 3));
@@ -1001,35 +1003,47 @@ class ExcelGenerator {
             columnIndex: 0, rowIndex: data.length * 6 + 5),
         CellIndex.indexByColumnRow(
             columnIndex: 6, rowIndex: data.length * 6 + 5));
+    sheet.merge(
+        CellIndex.indexByColumnRow(
+            columnIndex: 0, rowIndex: data.length * 6 + 6),
+        CellIndex.indexByColumnRow(
+            columnIndex: 6, rowIndex: data.length * 6 + 6));
+    // Set Height
+    sheet.setRowHeight(data.length * 6 + 3, 45);
+    // Set Total D GR Cum Qty by Date
+    sheet
+        .cell(CellIndex.indexByColumnRow(
+            columnIndex: 21, rowIndex: data.length * 6 + 2))
+        .value = TextCellValue("Total");
+
+    sheet
+        .cell(CellIndex.indexByColumnRow(
+            columnIndex: 23, rowIndex: data.length * 6 + 2))
+        .value = TextCellValue(totalDGrCumQty.toString());
 
     //
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 0, rowIndex: data.length * 6 + 2))
+            columnIndex: 0, rowIndex: data.length * 6 + 3))
         .value = TextCellValue("Prepared By");
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 0, rowIndex: data.length * 6 + 2))
+            columnIndex: 0, rowIndex: data.length * 6 + 3))
         .cellStyle = signStyle;
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 0, rowIndex: data.length * 6 + 3))
+            columnIndex: 0, rowIndex: data.length * 6 + 4))
         .value = TextCellValue("Name: ");
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 0, rowIndex: data.length * 6 + 4))
+            columnIndex: 0, rowIndex: data.length * 6 + 5))
         .value = TextCellValue("ID: ");
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 0, rowIndex: data.length * 6 + 5))
+            columnIndex: 0, rowIndex: data.length * 6 + 6))
         .value = TextCellValue("Designation: ");
     // ----------------- Quality ------------------- //
 
-    sheet.merge(
-        CellIndex.indexByColumnRow(
-            columnIndex: 7, rowIndex: data.length * 6 + 2),
-        CellIndex.indexByColumnRow(
-            columnIndex: 13, rowIndex: data.length * 6 + 2));
     sheet.merge(
         CellIndex.indexByColumnRow(
             columnIndex: 7, rowIndex: data.length * 6 + 3),
@@ -1045,33 +1059,33 @@ class ExcelGenerator {
             columnIndex: 7, rowIndex: data.length * 6 + 5),
         CellIndex.indexByColumnRow(
             columnIndex: 13, rowIndex: data.length * 6 + 5));
+    sheet.merge(
+        CellIndex.indexByColumnRow(
+            columnIndex: 7, rowIndex: data.length * 6 + 6),
+        CellIndex.indexByColumnRow(
+            columnIndex: 13, rowIndex: data.length * 6 + 6));
 
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 7, rowIndex: data.length * 6 + 2))
+            columnIndex: 7, rowIndex: data.length * 6 + 3))
         .value = TextCellValue("Floor Chief(Quality)");
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 7, rowIndex: data.length * 6 + 2))
+            columnIndex: 7, rowIndex: data.length * 6 + 3))
         .cellStyle = signStyle;
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 7, rowIndex: data.length * 6 + 3))
+            columnIndex: 7, rowIndex: data.length * 6 + 4))
         .value = TextCellValue("Name: ");
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 7, rowIndex: data.length * 6 + 4))
+            columnIndex: 7, rowIndex: data.length * 6 + 5))
         .value = TextCellValue("ID: ");
     sheet
         .cell(CellIndex.indexByColumnRow(
-            columnIndex: 7, rowIndex: data.length * 6 + 5))
+            columnIndex: 7, rowIndex: data.length * 6 + 6))
         .value = TextCellValue("Designation: ");
     // ----------------- Packing ------------------- //
-    sheet.merge(
-        CellIndex.indexByColumnRow(
-            columnIndex: 14, rowIndex: data.length * 6 + 2),
-        CellIndex.indexByColumnRow(
-            columnIndex: 20, rowIndex: data.length * 6 + 2));
     sheet.merge(
         CellIndex.indexByColumnRow(
             columnIndex: 14, rowIndex: data.length * 6 + 3),
@@ -1087,33 +1101,33 @@ class ExcelGenerator {
             columnIndex: 14, rowIndex: data.length * 6 + 5),
         CellIndex.indexByColumnRow(
             columnIndex: 20, rowIndex: data.length * 6 + 5));
-    sheet
-        .cell(CellIndex.indexByColumnRow(
-            columnIndex: 14, rowIndex: data.length * 6 + 2))
-        .value = TextCellValue("Floor Chief(Packing)");
-    sheet
-        .cell(CellIndex.indexByColumnRow(
-            columnIndex: 14, rowIndex: data.length * 6 + 2))
-        .cellStyle = signStyle;
+    sheet.merge(
+        CellIndex.indexByColumnRow(
+            columnIndex: 14, rowIndex: data.length * 6 + 6),
+        CellIndex.indexByColumnRow(
+            columnIndex: 20, rowIndex: data.length * 6 + 6));
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 14, rowIndex: data.length * 6 + 3))
-        .value = TextCellValue("Name: ");
+        .value = TextCellValue("Floor Chief(Packing)");
+    sheet
+        .cell(CellIndex.indexByColumnRow(
+            columnIndex: 14, rowIndex: data.length * 6 + 3))
+        .cellStyle = signStyle;
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 14, rowIndex: data.length * 6 + 4))
-        .value = TextCellValue("ID: ");
+        .value = TextCellValue("Name: ");
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 14, rowIndex: data.length * 6 + 5))
+        .value = TextCellValue("ID: ");
+    sheet
+        .cell(CellIndex.indexByColumnRow(
+            columnIndex: 14, rowIndex: data.length * 6 + 6))
         .value = TextCellValue("Designation: ");
 
     // ----------------- Production ------------------- //
-    sheet.merge(
-        CellIndex.indexByColumnRow(
-            columnIndex: 21, rowIndex: data.length * 6 + 2),
-        CellIndex.indexByColumnRow(
-            columnIndex: 27, rowIndex: data.length * 6 + 2));
     sheet.merge(
         CellIndex.indexByColumnRow(
             columnIndex: 21, rowIndex: data.length * 6 + 3),
@@ -1129,28 +1143,34 @@ class ExcelGenerator {
             columnIndex: 21, rowIndex: data.length * 6 + 5),
         CellIndex.indexByColumnRow(
             columnIndex: 27, rowIndex: data.length * 6 + 5));
-    sheet
-        .cell(CellIndex.indexByColumnRow(
-            columnIndex: 21, rowIndex: data.length * 6 + 2))
-        .value = TextCellValue("Floor Production In-charge");
-    sheet
-        .cell(CellIndex.indexByColumnRow(
-            columnIndex: 21, rowIndex: data.length * 6 + 2))
-        .cellStyle = signStyle;
+    sheet.merge(
+        CellIndex.indexByColumnRow(
+            columnIndex: 21, rowIndex: data.length * 6 + 6),
+        CellIndex.indexByColumnRow(
+            columnIndex: 27, rowIndex: data.length * 6 + 6));
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 21, rowIndex: data.length * 6 + 3))
-        .value = TextCellValue("Name: ");
+        .value = TextCellValue("Floor Production In-charge");
+    sheet
+        .cell(CellIndex.indexByColumnRow(
+            columnIndex: 21, rowIndex: data.length * 6 + 3))
+        .cellStyle = signStyle;
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 21, rowIndex: data.length * 6 + 4))
-        .value = TextCellValue("ID: ");
+        .value = TextCellValue("Name: ");
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 21, rowIndex: data.length * 6 + 5))
+        .value = TextCellValue("ID: ");
+    sheet
+        .cell(CellIndex.indexByColumnRow(
+            columnIndex: 21, rowIndex: data.length * 6 + 6))
         .value = TextCellValue("Designation: ");
 
     // Call function save() to download the file
-    var fileBytes = excel.save(fileName: 'My_Excel_File_Name.xlsx');
+    var fileBytes = excel.save(
+        fileName: 'Daily Work Center_${factoryName}_${floorName}_${date}.xlsx');
   }
 }
