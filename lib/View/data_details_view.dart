@@ -168,6 +168,10 @@ class DataDetailsView extends StatelessWidget {
                                         child: Text("Floor-5"),
                                         value: "Floor-5",
                                       ),
+                                      DropdownMenuItem(
+                                        child: Text("PDS"),
+                                        value: "PDS",
+                                      ),
                                     ]),
                               ),
                             ),

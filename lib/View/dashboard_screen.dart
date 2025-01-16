@@ -94,53 +94,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             animationDuration: Duration(milliseconds: 800),
                           )),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        child: ListView.builder(
-                            itemCount: Provider.of<DataFetchStateManagement>(
-                                    context,
-                                    listen: false)
-                                .userList
-                                .length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  ListTile(
-                                    leading: Text(
-                                      Provider.of<DataFetchStateManagement>(
-                                              context,
-                                              listen: false)
-                                          .userList[index]["factoryName"],
-                                      style: GoogleFonts.ptSerif(
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                    title: Text(
-                                      Provider.of<DataFetchStateManagement>(
-                                              context,
-                                              listen: false)
-                                          .userList[index]["userName"],
-                                      style: GoogleFonts.ptSerif(fontSize: 13),
-                                    ),
-                                    subtitle: Text(
-                                      Provider.of<DataFetchStateManagement>(
-                                              context,
-                                              listen: false)
-                                          .userList[index]["floorName"],
-                                      style: GoogleFonts.ptSerif(
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    trailing: Text(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          child: SingleChildScrollView(
+                            child: DataTable(
+                              dataTextStyle: GoogleFonts.ptSerif(),
+                              border: TableBorder.all(),
+                              headingRowHeight: 25,
+                              headingRowColor:
+                                  WidgetStatePropertyAll(Styles().palletes4),
+                              headingTextStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10,
+                                color: Colors.white,
+                              ),
+                              columns: [
+                                DataColumn(label: Text("Factory")),
+                                DataColumn(label: Text("Floor")),
+                                DataColumn(label: Text("Name")),
+                                DataColumn(label: Text("Last Active")),
+                              ],
+                              rows: [
+                                for (int i = 0;
+                                    i <
                                         Provider.of<DataFetchStateManagement>(
                                                 context,
                                                 listen: false)
-                                            .userList[index]["lastActive"]),
-                                  ),
-                                  Divider(),
-                                ],
-                              );
-                            }),
-                      )
+                                            .userList
+                                            .length;
+                                    i++)
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                        Provider.of<DataFetchStateManagement>(
+                                                context,
+                                                listen: false)
+                                            .userList[i]["factoryName"])),
+                                    DataCell(Text(
+                                        Provider.of<DataFetchStateManagement>(
+                                                context,
+                                                listen: false)
+                                            .userList[i]["floorName"])),
+                                    DataCell(Text(
+                                        Provider.of<DataFetchStateManagement>(
+                                                context,
+                                                listen: false)
+                                            .userList[i]["userName"])),
+                                    DataCell(Text(
+                                        Provider.of<DataFetchStateManagement>(
+                                                context,
+                                                listen: false)
+                                            .userList[i]["lastActive"])),
+                                  ])
+                              ],
+                            ),
+                          ))
                     ],
                   ),
                 )
@@ -320,3 +326,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
+
+
+
+
+// ListView.builder(
+//                             itemCount: Provider.of<DataFetchStateManagement>(
+//                                     context,
+//                                     listen: false)
+//                                 .userList
+//                                 .length,
+//                             itemBuilder: (context, index) {
+//                               return Column(
+//                                 children: [
+//                                   ListTile(
+//                                     leading: Text(
+//                                       Provider.of<DataFetchStateManagement>(
+//                                               context,
+//                                               listen: false)
+//                                           .userList[index]["factoryName"],
+//                                       style: GoogleFonts.ptSerif(
+//                                         fontSize: 10,
+//                                       ),
+//                                     ),
+//                                     title: Text(
+//                                       Provider.of<DataFetchStateManagement>(
+//                                               context,
+//                                               listen: false)
+//                                           .userList[index]["userName"],
+//                                       style: GoogleFonts.ptSerif(fontSize: 13),
+//                                     ),
+//                                     subtitle: Text(
+//                                       Provider.of<DataFetchStateManagement>(
+//                                               context,
+//                                               listen: false)
+//                                           .userList[index]["floorName"],
+//                                       style: GoogleFonts.ptSerif(
+//                                         fontSize: 11,
+//                                       ),
+//                                     ),
+//                                     trailing: Text(
+//                                         Provider.of<DataFetchStateManagement>(
+//                                                 context,
+//                                                 listen: false)
+//                                             .userList[index]["lastActive"]),
+//                                   ),
+//                                   Divider(),
+//                                 ],
+//                               );
+//                             }),

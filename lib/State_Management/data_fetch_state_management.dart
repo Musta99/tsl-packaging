@@ -238,19 +238,63 @@ class DataFetchStateManagement extends ChangeNotifier {
     }
   }
 
-  // Fetch Deleted Data ----------------------------------------------->
+  // Fetch Deleted Data First Batch ---------------(Pagination)-------------------------------->
   List deletedPOList = [];
+  DocumentSnapshot? lastDocument;
   bool isLoading = false;
+  bool hasMore = true;
+  int docLimit = 10;
   void fetchDeletedPO() async {
     isLoading = true;
     notifyListeners();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("deletedPO")
+        .limit(docLimit)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      lastDocument = querySnapshot.docs.last;
+      notifyListeners();
+    }
+
+    deletedPOList = querySnapshot.docs;
+    isLoading = false;
+    hasMore = querySnapshot.docs.length == docLimit;
+    notifyListeners();
+  }
+
+  // ============ Fetch Next Batch ==================//
+  void fetchNextBatch() async {
+    if (!hasMore || isLoading) return;
+
+    isLoading = true;
+    notifyListeners();
+
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("deletedPO")
+        .startAfterDocument(lastDocument!)
+        .limit(docLimit)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      lastDocument = querySnapshot.docs.last;
+      notifyListeners();
+    }
+
+    deletedPOList.addAll(querySnapshot.docs);
+    isLoading = false;
+    hasMore = querySnapshot.docs.length == docLimit;
+    notifyListeners();
+  }
+
+  // fetch Deleted Data for Excel Report ------------------------------------------>
+
+  List deletedPOExcel = [];
+  void fetchDeletedPOforExcel() async {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection("deletedPO").get();
 
-    deletedPOList = querySnapshot.docs;
-    notifyListeners();
-
-    isLoading = false;
+    deletedPOExcel = querySnapshot.docs;
     notifyListeners();
   }
 

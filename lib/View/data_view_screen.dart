@@ -153,7 +153,7 @@ class _DataViewScreenState extends State<DataViewScreen> {
                                     ? 1
                                     : 0.3,
                             icon: FontAwesomeIcons.listNumeric,
-                            title: "PO Wise",
+                            title: "Prod Order Wise",
                           ),
                         ),
                         SizedBox(
