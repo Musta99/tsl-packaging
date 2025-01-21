@@ -1009,9 +1009,13 @@ class ExcelGenerator {
             columnIndex: 0, rowIndex: data.length * 6 + 6),
         CellIndex.indexByColumnRow(
             columnIndex: 6, rowIndex: data.length * 6 + 6));
-    // Set Height
-    sheet.setRowHeight(data.length * 6 + 3, 45);
-    // Set Total D GR Cum Qty by Date
+    // Set Height---------------------------------------------------------------------------------
+    sheet.setRowHeight(data.length * 6 + 3, 50);
+    sheet.setRowHeight(data.length * 6 + 4, 35);
+    sheet.setRowHeight(data.length * 6 + 5, 35);
+    sheet.setRowHeight(data.length * 6 + 6, 35);
+
+    // Set Total D GR Cum Qty by Date-------------------------------------------------------------
     sheet
         .cell(CellIndex.indexByColumnRow(
             columnIndex: 21, rowIndex: data.length * 6 + 2))
