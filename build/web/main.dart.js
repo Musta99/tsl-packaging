@@ -91758,7 +91758,7 @@ r.c.N(new A.j(r.e,r.f),new A.T(new A.U("Date: "+d0,a7,a7)))
 r=s.J(new A.j(0,25))
 r.c.a.a=!0
 r.a=n
-j=["Buyer","Style","Buy","Sales Order No","Item","FG(Mat No)","Our No(F.R)","Color Name","Country Name","Prod Order No","Purchase No","Order/Issue",a8,"","","","","","","","","","","D GR Qty","Total GR Cum Qty","Balance GR Qty","Last Day Pack Qty","Remarks"]
+j=["Buyer","Style","Buy","Sales Order No","Item","FG(Mat No)","Our No(F.R)","Color Name","Country Name","Prod Order No","PO No","Order/Issue",a8,"","","","","","","","","","","D GR Qty","Total GR Cum Qty","Balance GR Qty","Last Day Pack Qty","Remarks"]
 i=["A","B","C","D","E","F","G","H","I","J","K","L","X","Y","Z","AA","AB"]
 h=["M","N","O","P","Q","R","S","T","U","V","W"]
 for(g=0;g<28;++g){if(g===12||g===13||g===14||g===15||g===16||g===17||g===18||g===19||g===20||g===21||g===22){f=A.h8("M2")

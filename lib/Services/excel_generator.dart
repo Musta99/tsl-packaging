@@ -487,7 +487,7 @@ class ExcelGenerator {
       "Color Name",
       "Country Name",
       "Prod Order No",
-      "Purchase No",
+      "PO No",
       "Order/Issue",
       "Size Information",
       "",
