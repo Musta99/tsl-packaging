@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 class LeftBarStateManagement extends ChangeNotifier {
   bool isHomeActive = true;
   bool isDataActive = false;
+  bool isDateActive = false;
   bool isPOWiseActive = false;
+  bool isSOWiseActive = false;
   bool isSeasonWiseActive = false;
   bool isStyleWiseActive = false;
   bool isDeletedPOActive = false;
@@ -11,7 +13,9 @@ class LeftBarStateManagement extends ChangeNotifier {
   void activeHome() {
     isHomeActive = true;
     isDataActive = false;
+    isDateActive = false;
     isPOWiseActive = false;
+    isSOWiseActive = false;
     isSeasonWiseActive = false;
     isStyleWiseActive = false;
     isDeletedPOActive = false;
@@ -22,7 +26,22 @@ class LeftBarStateManagement extends ChangeNotifier {
   void activeData() {
     isHomeActive = false;
     isDataActive = true;
+    isDateActive = false;
     isPOWiseActive = false;
+    isSOWiseActive = false;
+    isSeasonWiseActive = false;
+    isStyleWiseActive = false;
+    isDeletedPOActive = false;
+
+    notifyListeners();
+  }
+
+  void activeDate() {
+    isHomeActive = false;
+    isDataActive = false;
+    isDateActive = true;
+    isPOWiseActive = false;
+    isSOWiseActive = false;
     isSeasonWiseActive = false;
     isStyleWiseActive = false;
     isDeletedPOActive = false;
@@ -33,7 +52,22 @@ class LeftBarStateManagement extends ChangeNotifier {
   void activePO() {
     isHomeActive = false;
     isDataActive = false;
+    isDateActive = false;
     isPOWiseActive = true;
+    isSOWiseActive = false;
+    isSeasonWiseActive = false;
+    isStyleWiseActive = false;
+    isDeletedPOActive = false;
+
+    notifyListeners();
+  }
+
+  void activeSO() {
+    isHomeActive = false;
+    isDataActive = false;
+    isDateActive = false;
+    isPOWiseActive = false;
+    isSOWiseActive = true;
     isSeasonWiseActive = false;
     isStyleWiseActive = false;
     isDeletedPOActive = false;
@@ -44,7 +78,9 @@ class LeftBarStateManagement extends ChangeNotifier {
   void activeSeason() {
     isHomeActive = false;
     isDataActive = false;
+    isDateActive = false;
     isPOWiseActive = false;
+    isSOWiseActive = false;
     isSeasonWiseActive = true;
     isStyleWiseActive = false;
     isDeletedPOActive = false;
@@ -55,7 +91,9 @@ class LeftBarStateManagement extends ChangeNotifier {
   void activeStyle() {
     isHomeActive = false;
     isDataActive = false;
+    isDateActive = false;
     isPOWiseActive = false;
+    isSOWiseActive = false;
     isSeasonWiseActive = false;
     isStyleWiseActive = true;
     isDeletedPOActive = false;
@@ -66,7 +104,9 @@ class LeftBarStateManagement extends ChangeNotifier {
   void activeDeleted() {
     isHomeActive = false;
     isDataActive = false;
+    isDateActive = false;
     isPOWiseActive = false;
+    isSOWiseActive = false;
     isSeasonWiseActive = false;
     isStyleWiseActive = false;
     isDeletedPOActive = true;

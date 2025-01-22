@@ -40,4 +40,14 @@ class SelectionStateManagement extends ChangeNotifier {
     selectedMonth = value;
     notifyListeners();
   }
+
+  // ------------------------> <------------------------
+  String selectedDateReport =
+      "${DateTime.now().day.toString()}-${DateTime.now().month.toString()}-${DateTime.now().year.toString()}";
+
+  void dateSelectionReport(DateTime date) {
+    selectedDateReport =
+        "${date.day.toString()}-${date.month.toString()}-${date.year.toString()}";
+    notifyListeners();
+  }
 }

@@ -139,6 +139,40 @@ class DataFetchStateManagement extends ChangeNotifier {
     }
   }
 
+  // -----------------> Fetch Data for Data Sales Order Wise View <-------------------------
+
+  List packagingDataSOWise = [];
+  bool isLoadedSOWise = false;
+
+  Future getDataAdminSOWise(BuildContext context, soNumber) async {
+    try {
+      isLoadedSOWise;
+      for (int i = 0; i < factoryList.length; i++) {
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection(factoryList[i])
+            .where("salesOrderNo", isEqualTo: soNumber)
+            .get();
+
+        packagingDataSOWise.addAll(querySnapshot.docs);
+      }
+
+      isLoadedSOWise = true;
+      notifyListeners();
+    } catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            err.toString(),
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
   // -----------------> Fetch Data for Data Season Wise View <-------------------------
 
   List packagingDataSeasonWise = [];
@@ -157,6 +191,40 @@ class DataFetchStateManagement extends ChangeNotifier {
       }
 
       isLoadedSeasonWise = true;
+      notifyListeners();
+    } catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            err.toString(),
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  // -----------------> Fetch Data for Date Wise View <-------------------------
+
+  List packagingDataDateWise = [];
+  bool isLoadedDateWise = false;
+
+  Future getDataAdminDateWise(BuildContext context, date) async {
+    try {
+      isLoadedDateWise;
+      for (int i = 0; i < factoryList.length; i++) {
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection(factoryList[i])
+            .where("date", isEqualTo: date)
+            .get();
+
+        packagingDataDateWise.addAll(querySnapshot.docs);
+      }
+
+      isLoadedDateWise = true;
       notifyListeners();
     } catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(

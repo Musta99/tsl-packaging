@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:modern_textfield/modern_textfield.dart';
 import 'package:provider/provider.dart';
 
+import '../Services/excel_generator.dart';
 import '../State_Management/data_fetch_state_management.dart';
 import '../State_Management/selection_state_management.dart';
 import '../Utilities/Widgets/datatable_widget.dart';
@@ -27,15 +28,28 @@ class _DataDetailsPOWiseState extends State<DataDetailsPOWise> {
   }
 
   @override
+  void dispose() {
+    poController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.small(
-        backgroundColor: Styles().palletes3,
-        onPressed: () {},
-        child: Image.asset(
-          "assets/images/excel.png",
-          height: 30,
-          width: 30,
+        onPressed: () {
+          ExcelGenerator().createExcelForPOWise(
+            Provider.of<DataFetchStateManagement>(context, listen: false)
+                .packagingDataPOWise,
+            poController.text.trim().toUpperCase(),
+          );
+        },
+        child: Center(
+          child: Image.asset(
+            "assets/images/excel.png",
+            height: 30,
+            width: 30,
+          ),
         ),
       ),
       body: Container(
@@ -122,7 +136,7 @@ class _DataDetailsPOWiseState extends State<DataDetailsPOWise> {
                           .isLoadedPOWise ==
                       false
                   ? Center(
-                      child: Text("Select Factory and Provide PO"),
+                      child: Text("Provide Production Order No"),
                     )
                   : Provider.of<DataFetchStateManagement>(context)
                           .packagingDataPOWise

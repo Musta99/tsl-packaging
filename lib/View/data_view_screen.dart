@@ -9,7 +9,9 @@ import 'package:tsl_packaging/Utilities/Widgets/left_bar_button.dart';
 import 'package:tsl_packaging/Utilities/styles.dart';
 import 'package:tsl_packaging/View/dashboard_screen.dart';
 import 'package:tsl_packaging/View/data_PO_Wise.dart';
+import 'package:tsl_packaging/View/data_date_wise_screen.dart';
 import 'package:tsl_packaging/View/data_details_view.dart';
+import 'package:tsl_packaging/View/data_sales_order_wise_screen.dart';
 import 'package:tsl_packaging/View/data_season_wise.dart';
 import 'package:tsl_packaging/View/data_style_wise.dart';
 import 'package:tsl_packaging/View/deleted_data_screen.dart';
@@ -47,206 +49,260 @@ class _DataViewScreenState extends State<DataViewScreen> {
           children: [
             // ---------------------- Left Side Bar ------------------
 
-            Container(
-              width: MediaQuery.of(context).size.width * 0.2,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                color: Styles().palletes4,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
-                ),
-              ),
+            SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(
-                  top: 15,
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  color: Styles().palletes4,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: SelectableText(
-                            "EasyPack",
-                            style: GoogleFonts.pacifico(
-                              color: Colors.white,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.015,
+                child: Container(
+                  margin: EdgeInsets.only(
+                    top: 15,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: SelectableText(
+                              "EasyPack",
+                              style: GoogleFonts.pacifico(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.015,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.08,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Provider.of<LeftBarStateManagement>(context,
-                                    listen: false)
-                                .activeHome();
-                          },
-                          child: LeftBarCommonButton(
-                            iconOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isHomeActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            textOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isHomeActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            icon: FontAwesomeIcons.home,
-                            title: "Home",
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.08,
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Provider.of<LeftBarStateManagement>(context,
-                                    listen: false)
-                                .activeData();
-                          },
-                          child: LeftBarCommonButton(
-                            iconOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isDataActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            textOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isDataActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            icon: FontAwesomeIcons.database,
-                            title: "Data",
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeHome();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isHomeActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isHomeActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: FontAwesomeIcons.home,
+                              title: "Home",
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Provider.of<LeftBarStateManagement>(context,
-                                    listen: false)
-                                .activePO();
-                          },
-                          child: LeftBarCommonButton(
-                            iconOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isPOWiseActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            textOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isPOWiseActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            icon: FontAwesomeIcons.listNumeric,
-                            title: "Prod Order Wise",
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Provider.of<LeftBarStateManagement>(context,
-                                    listen: false)
-                                .activeStyle();
-                          },
-                          child: LeftBarCommonButton(
-                            iconOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isStyleWiseActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            textOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isStyleWiseActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            icon: Icons.style,
-                            title: "Style Wise",
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeData();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isDataActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isDataActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: FontAwesomeIcons.database,
+                              title: "Daily Report",
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Provider.of<LeftBarStateManagement>(context,
-                                    listen: false)
-                                .activeSeason();
-                          },
-                          child: LeftBarCommonButton(
-                            iconOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isSeasonWiseActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            textOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isSeasonWiseActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            icon: FontAwesomeIcons.calendarAlt,
-                            title: "Season Wise",
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Provider.of<LeftBarStateManagement>(context,
-                                    listen: false)
-                                .activeDeleted();
-                          },
-                          child: LeftBarCommonButton(
-                            iconOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isDeletedPOActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            textOpacity:
-                                Provider.of<LeftBarStateManagement>(context)
-                                            .isDeletedPOActive ==
-                                        true
-                                    ? 1
-                                    : 0.3,
-                            icon: FontAwesomeIcons.eraser,
-                            title: "Deleted PO",
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeDate();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isDateActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isDateActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: Icons.weekend,
+                              title: "Date Wise",
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SelectableText(
-                        "Developed by: TSL R&D",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontSize: 10,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activePO();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isPOWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isPOWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: FontAwesomeIcons.listNumeric,
+                              title: "Prod Order Wise",
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeSO();
+                            },
+                            child: LeftBarCommonButton(
+                              icon: FontAwesomeIcons.salesforce,
+                              title: "Sales Order Wise",
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isSOWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isSOWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeStyle();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isStyleWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isStyleWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: Icons.style,
+                              title: "Style Wise",
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeSeason();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isSeasonWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isSeasonWiseActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: FontAwesomeIcons.calendarAlt,
+                              title: "Season Wise",
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<LeftBarStateManagement>(context,
+                                      listen: false)
+                                  .activeDeleted();
+                            },
+                            child: LeftBarCommonButton(
+                              iconOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isDeletedPOActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              textOpacity:
+                                  Provider.of<LeftBarStateManagement>(context)
+                                              .isDeletedPOActive ==
+                                          true
+                                      ? 1
+                                      : 0.3,
+                              icon: FontAwesomeIcons.eraser,
+                              title: "Deleted PO",
+                            ),
+                          ),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: SelectableText(
+                          "Developed by: Must@fiz",
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -270,7 +326,14 @@ class _DataViewScreenState extends State<DataViewScreen> {
                               : Provider.of<LeftBarStateManagement>(context)
                                       .isStyleWiseActive
                                   ? DataStyleWise()
-                                  : DeletedDataScreen(),
+                                  : Provider.of<LeftBarStateManagement>(context)
+                                          .isSOWiseActive
+                                      ? DataSalesOrderWiseScreen()
+                                      : Provider.of<LeftBarStateManagement>(
+                                                  context)
+                                              .isDateActive
+                                          ? DataDateWiseScreen()
+                                          : DeletedDataScreen(),
             ),
           ],
         ),

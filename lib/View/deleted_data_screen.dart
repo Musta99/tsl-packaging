@@ -39,8 +39,9 @@ class _DeletedDataScreenState extends State<DeletedDataScreen> {
       floatingActionButton: FloatingActionButton.small(
         onPressed: () {
           ExcelGenerator().createExcelForDeletedPO(
-              Provider.of<DataFetchStateManagement>(context, listen: false)
-                  .deletedPOExcel);
+            Provider.of<DataFetchStateManagement>(context, listen: false)
+                .deletedPOExcel,
+          );
         },
         child: Center(
           child: Image.asset(
